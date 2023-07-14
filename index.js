@@ -11,6 +11,11 @@ const server = http.createServer(app)
 
 app.use(cors())
 
+app.get('/', (req, res) => {
+    res.write('<h1>SOCKET SERVER FOR ROBOT SERVICE ON PORT : '+ PORT +'<h1>')
+    res.end()
+})
+
 const io = new Server(server, {
     cors: {
         origin: ['http://localhost:3000', 'http://final1-repo.vercel.app', 'http://final1-repo-test.vercel.app'],
