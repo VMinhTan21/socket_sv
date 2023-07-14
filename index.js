@@ -11,13 +11,8 @@ const server = http.createServer(app)
 
 app.use(cors())
 
-app.use('/', () => {
-    
-})
-
 const io = new Server(server, {
     cors: {
-        // origin: 'http://localhost:3000',
         origin: ['http://localhost:3000', 'http://final1-repo.vercel.app', 'http://final1-repo-test.vercel.app'],
         methods: ['GET', 'POST']
     }
@@ -29,7 +24,7 @@ server.listen(PORT, () => {
 
 io.on('connection', (socket) => {
     console.log("Client connected ", socket.id)
-    
+
     socket.on('NEW_ORDER', (data) => {
         console.log("new order from table ", data.table)
         socket.broadcast.emit('RECEIVED_NEW_ORDER', data.table)
